@@ -5,6 +5,11 @@ const PORT = process.env.PORT || 3000;
 const path = require('path');
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.get('/api/trees', async(req, res, next) => {
+    res.send(await Tree.findAll());
+})
 
 app.get('/', async(req, res, next) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
