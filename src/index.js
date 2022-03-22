@@ -2,19 +2,25 @@ import axios from 'axios';
 import React from 'react';
 import ReactDom from 'react-dom';
 import { connect, Provider } from 'react-redux';
-import store, { loadTrees } from './store';
+import store, { loadTrees, addTree } from './store';
+
+const TreeForm = (props) => {
+    return (
+        <div>
+            <h2>Add a Tree:</h2>
+            <button onClick={() => { store.dispatch(addTree()) }}>
+                Add +
+            </button>
+        </div>
+    );
+}
 
 class TreeDisplay extends React.Component {
     constructor() {
         super();
-        /* this.state = {
-            trees: []
-        } */
     }
     async componentDidMount() {
-        const response = await axios.get('/api/trees');
-        const trees = response.data;
-        //this.setState({trees});
+        const trees = (await axios.get('/api/trees')).data;
         store.dispatch(loadTrees(trees));
     }
     render() {
@@ -45,13 +51,19 @@ class TreeDisplay extends React.Component {
                         }
                     </tbody>
                 </table>
+                <hr />
+                <TreeForm />
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => { return state };
-const mapDispatchToProps = () => {}
+/* const mapDispatchToProps = (dispatch) => { 
+    return { 
+        loadTrees: () => { dispatch(loadTrees()) } 
+    } 
+}; */
 const ConnectedDisplay = connect(mapStateToProps)(TreeDisplay);
 
 ReactDom.render(

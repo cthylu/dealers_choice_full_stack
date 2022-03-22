@@ -8,7 +8,11 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/api/trees', async(req, res, next) => {
-    res.send(await Tree.findAll());
+    try {
+        res.send(await Tree.findAll());
+    } catch(err) {
+        next(err);
+    }
 })
 
 app.get('/', async(req, res, next) => {

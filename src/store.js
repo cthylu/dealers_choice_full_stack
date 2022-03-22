@@ -1,4 +1,5 @@
 import {createStore} from 'redux'
+import axios from 'axios'
 
 const LOAD_TREES = "LOAD_TREES";
 const ADD_TREE = "ADD_TREE";
@@ -9,7 +10,17 @@ export const loadTrees = (trees) => {
         trees: trees
     }
 }
-const addTree = () => {
+/* export const loadTrees = () => {
+    return async(dispatch) => {
+        const trees = await axios.get('/api/trees').data;
+        dispatch({
+            type: LOAD_MOVIES,
+            movies
+          });
+    }
+} */
+
+export const addTree = () => {
     return {
         type: ADD_TREE,
         tree: {
