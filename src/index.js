@@ -16,19 +16,18 @@ const TreeForm = (props) => {
 }
 
 class TreeDisplay extends React.Component {
-    constructor() {
-        super();
-    }
     async componentDidMount() {
-        const trees = (await axios.get('/api/trees')).data;
-        store.dispatch(loadTrees(trees));
+        //const trees = (await axios.get('/api/trees')).data;
+        //this.props.loadAllTrees(trees);
+        this.props.loadAllTrees();
+        //store.dispatch(loadTrees(trees));
     }
     render() {
-        console.log("PROPS: ", this.props);
+        //console.log("PROPS: ", this.props);
         return (
             <div>
-                <h1>The Wonderful World of Trees</h1>
-                <p>Check out these trees!</p>
+                <h1>Your Wonderful World of Trees Checklist</h1>
+                <p>Check out these trees! Plant them!</p>
                 <table>
                     <thead>
                         <tr>
@@ -37,8 +36,7 @@ class TreeDisplay extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {/*this.state.trees.map*/
-                            
+                        {
                             this.props.trees.map((row) => {
                                 return (
                                     <tr>
@@ -47,7 +45,6 @@ class TreeDisplay extends React.Component {
                                     </tr>
                                 )
                             })
-                            
                         }
                     </tbody>
                 </table>
@@ -59,12 +56,14 @@ class TreeDisplay extends React.Component {
 }
 
 const mapStateToProps = (state) => { return state };
-/* const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = (dispatch) => { 
     return { 
-        loadTrees: () => { dispatch(loadTrees()) } 
+        //loadAllTrees: (trees) => dispatch(loadTrees(trees)) 
+        loadAllTrees: () => dispatch(loadTrees()),
+        //addTree: (tree) => dispatch(addTree(tree))
     } 
-}; */
-const ConnectedDisplay = connect(mapStateToProps)(TreeDisplay);
+};
+const ConnectedDisplay = connect(mapStateToProps, mapDispatchToProps)(TreeDisplay);
 
 ReactDom.render(
     <Provider store={store}>

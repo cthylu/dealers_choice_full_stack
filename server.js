@@ -19,6 +19,16 @@ app.get('/', async(req, res, next) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.post('/', async(req, res, next) => {
+    try{
+      const tree = await Tree.create(req.body);
+      res.status(201).send(tree);
+    }
+    catch(err){
+      next(err);
+    }
+  })
+
 const startup = async () => {
     await syncAndSeed();
     app.listen(PORT, () => {

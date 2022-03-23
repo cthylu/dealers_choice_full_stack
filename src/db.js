@@ -14,8 +14,6 @@ const Tree = db.define("tree", {
 
 const syncAndSeed = async () => {
     await db.sync({force: true});
-    /* await Tree.create({name: "Parlor Palm", species: "Chamaedorea elegans"});
-    await Tree.create({name: "Red Japanese Maple", species: "Acer palmatum"}); */
     await Promise.all([
         Tree.create({name: "Parlor Palm", species: "Chamaedorea elegans"}),
         Tree.create({name: "Red Japanese Maple", species: "Acer palmatum"}),
