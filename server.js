@@ -19,15 +19,15 @@ app.get('/', async(req, res, next) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.post('/', async(req, res, next) => {
+/* app.post('/api/new-tree', async(req, res, next) => {
     try{
-      const tree = await Tree.create(req.body);
+      const tree = await Tree.create({ name: req.body.name, species: req.body.species });
       res.status(201).send(tree);
     }
     catch(err){
       next(err);
     }
-  })
+}); */
 
 const startup = async () => {
     await syncAndSeed();

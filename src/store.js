@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 const LOAD_TREES = "LOAD_TREES";
 const ADD_TREE = "ADD_TREE";
 
-// Actions
+// Action creators
 export const _loadTrees = (trees) => {
     return {
         type: LOAD_TREES,
@@ -33,7 +33,7 @@ export const loadTrees = () => {
 }
 /* export const addTree = (tree) => {
     return async (dispatch) => {
-        const newTree = (await axios.post('/api/trees'), tree).data;
+        const newTree = (await axios.post('/api/new-tree'), tree).data;
         dispatch(_addTree(newTree));
     }
 } */

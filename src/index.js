@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React from 'react';
 import ReactDom from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import store, { loadTrees, addTree } from './store';
+import { HashRouter } from 'react-router-dom';
 
 const TreeForm = (props) => {
     return (
@@ -28,6 +28,7 @@ class TreeDisplay extends React.Component {
             <div>
                 <h1>Your Wonderful World of Trees Checklist</h1>
                 <p>Check out these trees! Plant them!</p>
+                <p><em>(Apologies, this is only complete with a basic thunk, no routes or form yet)</em></p>
                 <table>
                     <thead>
                         <tr>
@@ -59,15 +60,20 @@ const mapStateToProps = (state) => { return state };
 const mapDispatchToProps = (dispatch) => { 
     return { 
         //loadAllTrees: (trees) => dispatch(loadTrees(trees)) 
-        loadAllTrees: () => dispatch(loadTrees()),
-        //addTree: (tree) => dispatch(addTree(tree))
+        loadAllTrees: () => dispatch(loadTrees())
     } 
 };
 const ConnectedDisplay = connect(mapStateToProps, mapDispatchToProps)(TreeDisplay);
 
+/* const ConnectedForm = connect(mapStateToProps, (dispatch) => {
+    return { addTree: (tree) => dispatch(addTree(tree)) }
+})(TreeForm); */
+
 ReactDom.render(
     <Provider store={store}>
-        <ConnectedDisplay />
+        <HashRouter />
+            <ConnectedDisplay />
+        <HashRouter />
     </Provider>, 
     document.querySelector('#app')
 );
